@@ -1,7 +1,24 @@
-<% if @pending_audit_confirmations.count > 0 %>
-  <div class='pending-homepage employee-blocks'>
-    <h3>Pending Your Confirmation</h3>
+<% pending_approvals.each do |pending_approval| %>
+  <div class='homepage-block col-md-3'>
+    <h4>
+      <%= pending_approval.user.full_name %>
+    </h4>
 
-    <%= render partial: 'pending_audit_confirmations', locals: { pending_audit_confirmations: @pending_audit_confirmations } %>
+    <p>
+      <span class='pending-details'>Date Submitted:</span> <%= pending_approval.date %>
+    </p>
+
+    <p>
+      <span class='pending-details'>Rationale:</span> <%= truncate pending_approval.rationale, length: 42 %>
+    </p>
+
+    <div class='row'>
+      <div class='col-md-6 column'>
+        <%= link_to 'Approve', approve_post_path(pending_approval), class: 'btn btn-success btn-block', id: "approve_#{pending_approval.id}" %>
+      </div>
+      <div class='col-md-6 column'>
+        <%= link_to 'Review', edit_post_path(pending_approval), class: 'btn btn-warning btn-block' %>
+      </div>
+    </div>
   </div>
 <% end %>
