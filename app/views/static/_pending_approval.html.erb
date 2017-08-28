@@ -1,24 +1,3 @@
-<% pending_approvals.each do |pending_approval| %>
-  <div class='homepage-block col-md-3'>
-    <h4>
-      <%= pending_approval.user.full_name %>
-    </h4>
-
-    <p>
-      <span class='pending-details'>Date Submitted:</span> <%= pending_approval.date %>
-    </p>
-
-    <p>
-      <span class='pending-details'>Rationale:</span> <%= truncate pending_approval.rationale, length: 42 %>
-    </p>
-
-    <div class='row'>
-    <div class='col-md-6 column'>
-      <%= link_to 'Approve', approve_post_path(pending_approval), class: 'btn btn-success btn-block', id: "approve_#{pending_approval.id}" %>
-    </div>
-    <div class='col-md-6 column'>
-      <%= link_to 'Review', edit_post_path(pending_approval), class: 'btn btn-warning btn-block' %>
-    </div>
-  </div>
-  </div>
+<% pending_audit_confirmations.each do |pending_audit_confirmation| %>
+  <%= link_to "I confirm that I did not perform any overtime for the week of: #{pending_audit_confirmation.start_date}", confirm_audit_log_path(pending_audit_confirmation), class: 'btn btn-primary btn-block btn-lg', id: "confirm_#{pending_audit_confirmation.id}", data: { confirm: 'Are you sure you want to confirm that you did not perform any overtime?' } %>
 <% end %>
